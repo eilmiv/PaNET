@@ -30,6 +30,7 @@
       {% assign alt_labels = entry["http://www.w3.org/2004/02/skos/core#altLabel"] %}
       {% assign source = entry["http://purl.obolibrary.org/obo/IAO_0000119"][0]["@value"] %}
       {% assign def = entry["http://purl.obolibrary.org/obo/IAO_0000115"][0]["@value"] %}
+      {% assign related_resources = entry["https://schema.org/subjectOf"] | map: "@id" %}
       
       {% assign super = entry["http://www.w3.org/2000/01/rdf-schema#subClassOf"] %}
       {% assign equi_id = entry["http://www.w3.org/2002/07/owl#equivalentClass"][0]["@id"] %}
@@ -42,7 +43,10 @@
       <div class="detail-box">
         <div class="detail-header">
           <h3 class="detail-title" id="{{ url_parts[-1] }}">{{ label }}</h3>
-          <p class="detail-back">Back to <a href="#toc">TOC</a></p>
+          <p class="detail-back">
+            {% if related_resources[0] %}Find <a target="_blank" href="https://pan-training.eu/ontology-term-search?iri={{ id }}">training</a>, {% endif %}
+            Back to <a href="#toc">TOC</a>
+          </p>
         </div>
         
         <hr>
